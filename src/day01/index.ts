@@ -38,7 +38,44 @@ const part1 = (rawInput: string) => {
 const part2 = (rawInput: string) => {
     const input = parseInput(rawInput);
 
-    return;
+    let lock = 50;
+    let count = 0;
+
+    const split = input.split("\n");
+
+    for (let i = 0; i < split.length; i++) {
+        const rotation = split[i];
+        const pastZero = Math.floor(parseInt(rotation.substring(1)) / 100);
+        const val = parseInt(rotation.substring(1)) % 100;
+
+        if(rotation.charAt(0) == "L") {
+            if(lock == 0) {
+                lock = lock - val;
+                lock = 100 - (-lock);
+            } else {
+                lock = lock - val
+
+                if (lock < 0) {
+                  lock = 100 - -lock
+                  count++
+                } else if (lock == 0) {
+                  count++
+                }
+            }
+        } else {
+            lock = lock + val;
+            
+            if(lock > 99) {
+                lock = lock - 100;
+                count++;
+            }
+        }
+
+        count = count + pastZero;
+        // console.log(`${split[i]} (${count})`);
+    }
+
+    return count.toString();
 }
 
 run({
@@ -62,17 +99,33 @@ run({
       },
       {
         input: `L102\nL48\nR200\nR50\nR50`,
-        expected: "3"
-      }
+        expected: "3",
+      },
     ],
     solution: part1,
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: `R50`,
+        expected: "1",
+      },
+      {
+        input: `L50`,
+        expected: "1",
+      },
+      {
+        input: `L50\nR50\nR50`,
+        expected: "2",
+      },
+      {
+        input: `L68\nL30\nR48\nL5\nR60\nL55\nL1\nL99\nR14\nL82`,
+        expected: "6",
+      },
+      {
+        input: `L102\nL48\nR200\nR50\nR50`,
+        expected: "5",
+      },
     ],
     solution: part2,
   },
