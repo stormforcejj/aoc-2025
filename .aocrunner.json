@@ -69,13 +69,16 @@
         "attempts": [
           "0"
         ],
-        "time": 4.2965
+        "time": 1.2801
       },
       "part2": {
-        "solved": false,
-        "result": null,
-        "attempts": [],
-        "time": null
+        "solved": true,
+        "result": "339668510830757",
+        "attempts": [
+          "NaN",
+          "317002602865927"
+        ],
+        "time": 0.9859
       }
     },
     {
